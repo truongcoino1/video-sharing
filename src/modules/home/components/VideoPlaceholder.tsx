@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { memo } from "react";
 
 type VideoPlaceholderProps = {
@@ -9,13 +10,20 @@ const VideoPlaceholder = ({
   handleClick,
 }: VideoPlaceholderProps) => {
   return (
-    <div className={`overflow-hidden relative`} onClick={handleClick}>
+    <div className={`video-placeholder flex items-center justify-center overflow-hidden relative w-full lg:w-[350px] min-w-[350px] lg:h-[196px]`} onClick={handleClick}>
       <img
-        className="w-full h-auto object-cover"
-        src={thumbnail}
+        className="w-full lg:w-[350px] lg:h-[196px] object-cover"
+        src={thumbnail || "/video-placeholder.png"}
         alt="video placeholder"
         width="640"
         height="480"
+      />
+      <img
+        className="absolute opacity-50"
+        src={'/youtube-brands.svg'}
+        alt="button play"
+        width="72"
+        height="72"
       />
     </div>
   );

@@ -1,5 +1,18 @@
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import Login from "../components/Login";
+import {flushPromises} from '@/modules/base';
+
+const login = jest.fn();
+jest.mock("../hooks/useAuth", () => {
+  const useAuth = () => {
+    return {
+      login: login,
+    };
+  };
+  return {
+    useAuth,
+  };
+});
 
 describe("Login", () => {
   afterEach(cleanup);
@@ -27,13 +40,21 @@ describe("Login", () => {
   const setUp = () => {
     const result = render(<Login />);
     const container = result.container;
-    const inputEmail = container.querySelector('input[type="email"]') as Element;
-    const inputPassword = container.querySelector('input[type="password"]') as Element;
-    const btnSubmit = container.querySelector('button[type="submit"]') as Element;
+    const inputEmail = container.querySelector(
+      'input[type="email"]'
+    ) as Element;
+    const inputPassword = container.querySelector(
+      'input[type="password"]'
+    ) as Element;
+    const btnSubmit = container.querySelector(
+      'button[type="submit"]'
+    ) as HTMLButtonElement;
+    const form = container.querySelector("form") as Element;
     return {
       inputEmail,
       inputPassword,
       btnSubmit,
+      form,
     };
   };
 
@@ -54,5 +75,12 @@ describe("Login", () => {
     fireEvent.change(inputEmail, { target: { value: "test_email@gmail.com" } });
     fireEvent.change(inputPassword, { target: { value: "test_password" } });
     expect(btnSubmit).not.toBeDisabled();
+  });
+
+  it("Button Login/Register should call login function when click",async () => {
+    const { form } = setUp();
+    form?.dispatchEvent(new Event("submit", { bubbles: true }));
+    await flushPromises()
+    expect(login).toBeCalledTimes(1);
   });
 });

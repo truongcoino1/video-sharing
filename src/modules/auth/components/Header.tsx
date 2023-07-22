@@ -1,22 +1,23 @@
+"use client"
 import React, { memo } from "react";
 import Link from "next/link";
 import Login from "./Login";
 import UserAction from "./UserAction";
-import { useAuth } from "../hooks/useAuth";
+import { useAuthContext } from "../context";
 
 const PATH_HOME = "/";
 
 const Header = () => {
-  const { user } = useAuth();
+  const { currentUser } = useAuthContext();
 
   return (
-    <header className="header-container lg:h-[66px] lg:flex lg:justify-between lg:items-center">
-      <h1 className="title">
-        <Link className="no-style hover:text-black" href={PATH_HOME}>
+    <header className="header-container lg:h-[66px] lg:flex lg:justify-between lg:items-center border-b border-gray-300">
+      <h1 className="title text-[36px] font-semibold">
+        <Link className="no-style hover:text-black text-light-high" href={PATH_HOME}>
           Funny Movies
         </Link>
       </h1>
-      {user ? <UserAction email={user.email} /> : <Login />}
+      {currentUser ? <UserAction email={currentUser.email} /> : <Login />}
     </header>
   );
 };

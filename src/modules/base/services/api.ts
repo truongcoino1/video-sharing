@@ -12,7 +12,7 @@ export let DEFAULT_HEADERS: TRequestHeader = {
 };
 
 export const SERVICE_TYPES = {
-  GATEWAY_URL: process.env.GATEWAY_URL,
+  GATEWAY_URL: process.env.NEXT_PUBLIC_GATEWAY_URL
 };
 
 const STATUS_CODE = {
