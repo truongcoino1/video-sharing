@@ -1,7 +1,2 @@
-import { memo } from "react"
-
-const HomePage = () => {
-    return <div></div>
-}
-
-export default memo(HomePage)
+export {default as HomePage} from './HomePage'; 
+export {default as SharePage} from './SharePage';

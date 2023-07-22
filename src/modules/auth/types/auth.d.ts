@@ -5,7 +5,8 @@ export type User = {
   email: string
   password: string
   role: string
-  refreshToken: string
+  refreshToken: string;
+  token: string;
 }
 
 export type UserSession = Omit<User, 'password' | 'refreshToken'>

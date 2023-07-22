@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useMemo } from "react";
-import { useInput } from "@/modules/base";
+import { Button, useInput } from "@/modules/base";
 import { useAuth } from "../hooks/useAuth";
 
 const Login = () => {
@@ -10,18 +10,21 @@ const Login = () => {
   const handleLogin = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      login(email, password);
+      login(email || "", password || "");
     },
     [email, password]
   );
 
   const isDisabled = useMemo(() => {
-    return loading || !email || !password;
-  }, [email, loading, password]);
+    return !email || !password;
+  }, [email, password]);
 
   return (
     <div className="login-container">
-      <form className="login-form flex-col flex lg:flex-row" onSubmit={handleLogin}>
+      <form
+        className="login-form flex-col flex lg:flex-row"
+        onSubmit={handleLogin}
+      >
         <input
           autoFocus
           name="email"
@@ -29,7 +32,7 @@ const Login = () => {
           placeholder="Email"
           aria-label="email"
           value={email}
-          className="mr-8 h-[40px] border rounded-medium border-gray-300 px-4"
+          className="lg:mr-8 h-[40px] px-8 mt-12 lg:mt-0 border rounded-medium border-gray-300"
           onChange={handleSetEmail}
         />
         <input
@@ -38,12 +41,10 @@ const Login = () => {
           placeholder="Password"
           aria-label="password"
           value={password}
-          className="mr-8 h-[40px] border rounded-medium border-gray-300 px-4"
+          className="lg:mr-8 h-[40px] px-8 border mt-12 lg:mt-0 rounded-medium border-gray-300"
           onChange={handleSetPassword}
         />
-        <button disabled={isDisabled} type="submit">
-          <span>Login / Register</span>
-        </button>
+        <Button isLoading={loading} type="submit" isDisable={isDisabled} label="Login / Register" className="px-8 lg:mt-0 h-[40px] mt-12 rounded-medium" />
       </form>
     </div>
   );

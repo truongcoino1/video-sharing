@@ -13,10 +13,11 @@ const MovieItem = ({ movie }: MovieItemProps): JSX.Element => {
   }, []);
 
   return (
-    <div className="flex justify-between mb-12">
+    <div className="movie-item lg:flex justify-between mb-12">
       {hasLoadIframe ? (
-        <div className="w-[350px] h-[196px] flex-shrink-0 overflow-hidden relative">
-          <iframe
+        <div className="lg:w-[350px] lg:h-[196px] w-full flex-shrink-0 overflow-hidden relative">
+          <iframe 
+            className="w-full h-full object-cover"
             title={movie.title}
             loading="lazy"
             allow="autoplay; fullscreen; accelerometer; encrypted-media; gyroscope; picture-in-picture"
@@ -29,9 +30,10 @@ const MovieItem = ({ movie }: MovieItemProps): JSX.Element => {
           handleClick={handleClickPlaceholder}
         />
       )}
-      <div className="h-[196px] ml-12 flex-grow">
-        <div className="font-bold text-24">
+      <div className="lg:h-[196px] lg:ml-24 flex-grow lg:mt-0 lg:mb-0 mt-12 mb-24">
+        <div className="font-bold text-[28px] overflow-hidden line-clamp-2 text-cyan-400">
           <a
+            className="title-link"
             href={`https://www.youtube.com/watch?v=${movie.id}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -40,12 +42,12 @@ const MovieItem = ({ movie }: MovieItemProps): JSX.Element => {
           </a>
         </div>
         <div className="flex items-center">
-          <div className="text-16" title={movie.shared_by}>
-            <span className="font-medium">Shared by:</span> {movie.shared_by}
+          <div className="shared-by text-light-low" title={movie.shared_by}>
+            <span className="font-semibold text-16 text-light-high">Shared by:</span> {movie.shared_by}
           </div>
         </div>
-        <div className="font-medium">Description:</div>
-        <p className="text-14">{movie.description}</p>
+        <div className="font-semibold text-16 text-light-high">Description:</div>
+        <p className="text-14 overflow-hidden text-light-low line-clamp-2 video-description">{movie.description}</p>
       </div>
     </div>
   );
