@@ -9,4 +9,9 @@ describe("SharePage", () => {
     const elm = result.container.querySelector(".home-container");
     expect(elm).toBeInTheDocument();
   });
+
+  it("should render correct HomePage", () => {
+    const element = render(<HomePage />);
+    expect(element).toMatchSnapshot();
+  });
 });

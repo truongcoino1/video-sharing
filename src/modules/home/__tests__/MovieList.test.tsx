@@ -13,4 +13,9 @@ describe("MovieList", () => {
     const elm = result.container.querySelector(".movie-list-container");
     expect(elm).toBeInTheDocument();
   });
+
+  it("should render correct MovieList", () => {
+    const element = render(<MovieList />);
+    expect(element).toMatchSnapshot();
+  });
 });

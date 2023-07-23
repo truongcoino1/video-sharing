@@ -24,7 +24,6 @@ describe("Login", () => {
     const inputEmail = container.querySelector('input[type="email"]');
     const inputPassword = container.querySelector('input[type="password"]');
     const btnSubmit = container.querySelector('button[type="submit"]');
-
     expect(elm).toBeInTheDocument();
     expect(inputEmail).toBeInTheDocument();
     expect(inputPassword).toBeInTheDocument();
@@ -82,5 +81,10 @@ describe("Login", () => {
     form?.dispatchEvent(new Event("submit", { bubbles: true }));
     await flushPromises()
     expect(login).toBeCalledTimes(1);
+  });
+  
+  it('should render correct Login', () => {
+    const login = render(<Login />)
+    expect(login).toMatchSnapshot();
   });
 });

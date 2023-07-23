@@ -1,5 +1,17 @@
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import UserAction from "../components/UserAction";
+import { useAuth } from "../hooks/useAuth";
+
+const logout = jest.fn();
+jest.mock("../hooks/useAuth", () => {
+  const useAuth = () => {
+    return {
+      logout: logout
+    };
+  }
+
+  return { useAuth }
+});
 
 describe("UserAction", () => {
   afterEach(cleanup);
@@ -25,12 +37,15 @@ describe("UserAction", () => {
     expect(elm?.textContent).toBe(`Welcome `);
   });
 
-  // viet lai test case nay
-  // it('It calls start logout on button click', () => {
-  //   const mockLogout = jest.fn();
-  //   const result = render(<UserAction />);
-  //   const btn = result.container.querySelector(".btn-logout") as Element;
-  //   fireEvent.click(btn)
-  //   expect(mockLogout.mock.calls.length).toEqual(1);
-  // });
+  it('It calls start logout on button click', () => {
+    const result = render(<UserAction />);
+    const btn = result.container.querySelector(".btn-logout") as Element;
+    fireEvent.click(btn)
+    expect(logout).toBeCalledTimes(1);
+  });
+
+  it('should render correct Login', () => {
+    const element = render(<UserAction />)
+    expect(element).toMatchSnapshot();
+  });
 });

@@ -15,8 +15,8 @@ describe("useAuth", () => {
 
   it("login should work when login API success", async () => {
     AuthService.login = jest.fn().mockResolvedValue({
-      success: true,
-      data: { id: 1 },
+      status: "success",
+      result: { id: 1 },
     });
     const { result } = renderHook(() => useAuth());
     await act(async () => {

@@ -9,4 +9,9 @@ describe("SharePage", () => {
     const elm = result.container.querySelector(".share-container");
     expect(elm).toBeInTheDocument();
   });
+
+  it("should render correct Share", () => {
+    const element = render(<Share />);
+    expect(element).toMatchSnapshot();
+  });
 });

@@ -6,6 +6,6 @@ export const AuthService = {
     email: string,
     password: string
   ): Promise<ApiResponse<User>> => {
-    return await api.post("/auth/login", { email, password });
+    return await api.post("/api/auth/login", { email, password });
   },
 };

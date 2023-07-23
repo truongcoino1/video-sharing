@@ -59,4 +59,9 @@ describe("MovieItem", () => {
     expect(sharedBy).toBeInTheDocument();
     expect(sharedBy.innerHTML).toBe(`<span class=\"font-semibold text-16 text-light-high\">Shared by:</span> ${movie.shared_by}`);
   });
+
+  it("should render correct MovieItem", () => {
+    const element = render(<MovieItem movie={movie} />);
+    expect(element).toMatchSnapshot();
+  });
 });

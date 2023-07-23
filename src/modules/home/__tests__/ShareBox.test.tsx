@@ -77,4 +77,9 @@ describe("ShareBox", () => {
    expect(shareMovie).toBeCalledTimes(1);
    
   });
+
+  it("should render correct ShareBox", () => {
+    const element = render(<ShareBox />);
+    expect(element).toMatchSnapshot();
+  });
 });

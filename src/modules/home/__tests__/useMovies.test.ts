@@ -14,8 +14,8 @@ describe("useMovies", () => {
 
   it("getMovies should work when getMovies API success", async () => {
     HomeService.getMovies = jest.fn().mockResolvedValue({
-      success: true,
-      data: [{ id: 1 }],
+      status: "success",
+      result: [{ id: 1 }],
     });
     const { result } = renderHook(() => useMovies());
     await act(async () => {
@@ -52,8 +52,8 @@ describe("useMovies", () => {
       ],
     });
     HomeService.shareMovie = jest.fn().mockResolvedValue({
-      success: true,
-      data: { id: 1 },
+      status: "success",
+      result: { id: 1 },
     });
     const { result } = renderHook(() => useMovies());
     await act(async () => {

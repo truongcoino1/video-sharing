@@ -28,4 +28,12 @@ describe("VideoPlaceholder", () => {
       "https://i.ytimg.com/vi/r3ARBhMk_g4/sddefault.jpg"
     );
   });
+
+  it('should render correct VideoPlaceholder', () => {
+    const element = render( <VideoPlaceholder
+      thumbnail={"https://i.ytimg.com/vi/r3ARBhMk_g4/sddefault.jpg"}
+      handleClick={() => {}}
+    />)
+    expect(element).toMatchSnapshot();
+  });
 });

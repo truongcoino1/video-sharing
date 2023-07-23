@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { toast } from "react-toastify";
 import { HomeService } from "../services";
 import { getYoutubeVideoId } from "../utils";
 import { Movie } from "../types";
@@ -80,8 +81,8 @@ export const useMovies = () => {
       }));
       const page = param.refresh ? 0 : period.page;
       const response = await HomeService.getMovies(page, period.pageSize);
-      if (response.success) {
-        setMovies(response.data || []);
+      if (response.status ==="success" && response.result) {
+        setMovies(response.result || []);
         setPeriod((preState) => ({
           ...preState,
           loadMore: false,
@@ -101,6 +102,7 @@ export const useMovies = () => {
         ...preState,
         loadMore: false,
         refresh: false,
+        limited: true,
       }));
     }
   }, [period.page]);
@@ -128,11 +130,17 @@ export const useMovies = () => {
           id: videoId,
         });
         setIsSharing(false);
-        if (response.success && response.data) {
-          setMovies([response.data, ...movies]);
+        if (response.status === "success" && response.result) {
+          toast("Share successfully", {
+            type: "success",
+          });
+          setMovies([response.result, ...movies]);
         }
       }
-    } catch (error) {
+    } catch (error: any) {
+      toast(error.message, {
+        type: "error",
+      });
       setIsSharing(false);
     }
   }, []);
@@ -143,5 +151,6 @@ export const useMovies = () => {
     getMovies,
     shareMovie,
     isSharing,
+    setMovies
   };
 };
