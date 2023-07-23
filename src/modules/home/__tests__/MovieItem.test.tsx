@@ -8,6 +8,8 @@ const movie: Movie = {
   description: "description",
   thumbnail: "https://i.ytimg.com/vi/bP9gMpl1gyQ/sddefault.jpg",
   shared_by: "shared_by",
+  youtube_id: "bP9gMpl1gyQ",
+  created_date: Date.now(),
 };
 describe("MovieItem", () => {
   afterEach(cleanup);
@@ -38,7 +40,7 @@ describe("MovieItem", () => {
     expect(title).toBeInTheDocument();
     expect(title.innerHTML).toBe(movie.title);
     expect(title.getAttribute("href")).toBe(
-      `https://www.youtube.com/watch?v=${movie.id}`
+      `https://www.youtube.com/watch?v=${movie.youtube_id}`
     );
   });
 

@@ -15,13 +15,13 @@ const MovieItem = ({ movie }: MovieItemProps): JSX.Element => {
   return (
     <div className="movie-item lg:flex justify-between mb-12">
       {hasLoadIframe ? (
-        <div className="lg:w-[350px] lg:h-[196px] w-full flex-shrink-0 overflow-hidden relative">
+        <div className="lg:w-[350px] rounded-large lg:h-[196px] w-full flex-shrink-0 overflow-hidden relative">
           <iframe 
             className="w-full h-full object-cover"
             title={movie.title}
             loading="lazy"
             allow="autoplay; fullscreen; accelerometer; encrypted-media; gyroscope; picture-in-picture"
-            src={`https://www.youtube.com/embed/${movie.id}?autoplay=1`}
+            src={`https://www.youtube.com/embed/${movie.youtube_id}?autoplay=1`}
           />
         </div>
       ) : (
@@ -31,10 +31,10 @@ const MovieItem = ({ movie }: MovieItemProps): JSX.Element => {
         />
       )}
       <div className="lg:h-[196px] lg:ml-24 flex-grow lg:mt-0 lg:mb-0 mt-12 mb-24">
-        <div className="font-bold text-[28px] overflow-hidden line-clamp-2 text-cyan-400">
+        <div className="font-bold text-[24px] overflow-hidden line-clamp-2 text-cyan-400">
           <a
             className="title-link"
-            href={`https://www.youtube.com/watch?v=${movie.id}`}
+            href={`https://www.youtube.com/watch?v=${movie.youtube_id}`}
             target="_blank"
             rel="noopener noreferrer"
           >

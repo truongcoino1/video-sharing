@@ -4,8 +4,8 @@ export type Movie = {
   thumbnail: string;
   shared_by: string;
   description: string;
-  up_vote?: number;
-  down_vote?: number;
+  youtube_id: string;
+  created_date: number;
 };
 
-export type MovieSession = Omit<Movie, "shared_by">
+export type MovieSession = Omit<Movie, "shared_by" | "id" | "created_date">

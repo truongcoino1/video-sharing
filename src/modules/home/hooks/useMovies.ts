@@ -65,45 +65,63 @@ export const useMovies = () => {
   const [period, setPeriod] = useState({
     page: 0,
     limited: false,
-    pageSize: 20,
+    pageSize: 10,
     refresh: false,
     loadMore: false,
   });
 
   const [isSharing, setIsSharing] = useState(false);
 
-  const getMovies = useCallback(async (param: Period) => {
-    try {
-      setPeriod((preState) => ({
-        ...preState,
-        ...param
-      }));
-      const page = param.refresh ? 0 : period.page;
-      const response = await HomeService.getMovies(page, period.pageSize);
-      if (response.success) {
-        setMovies(response.data || []);
+  const getMovies = useCallback(
+    async (param: Period) => {
+      try {
+       
         setPeriod((preState) => ({
           ...preState,
-          loadMore: false,
-          refresh: false,
-          page: page + 1,
+          ...param,
         }));
-      } else {
+        const page = param.refresh ? 0 : period.page;
+        const moviesCnt = movies.length;
+        const last_date =
+          moviesCnt > 0 ? movies[moviesCnt - 1].id : undefined;
+        const response = await HomeService.getMovies(
+          period.pageSize,
+          last_date
+        );
+        if (response) {
+          const data = response.docs.map((doc) => doc.data()) as Movie[];
+          setMovies((preState) => {
+            if (param.refresh) {
+              return data;
+            }
+           
+            return [...preState, ...data];
+          });
+          setPeriod((preState) => ({
+            ...preState,
+            loadMore: false,
+            refresh: false,
+            page: page + 1,
+            limited: data.length < period.pageSize,
+          }));
+        } else {
+          setPeriod((preState) => ({
+            ...preState,
+            loadMore: false,
+            refresh: false,
+            page: preState.page,
+          }));
+        }
+      } catch (error) {
         setPeriod((preState) => ({
           ...preState,
           loadMore: false,
           refresh: false,
-          page: preState.page,
         }));
       }
-    } catch (error) {
-      setPeriod((preState) => ({
-        ...preState,
-        loadMore: false,
-        refresh: false,
-      }));
-    }
-  }, [period.page]);
+    },
+    [period.page, period.pageSize, movies]
+  );
 
   const shareMovie = useCallback(async (youtubeLink: string) => {
     try {
@@ -125,12 +143,9 @@ export const useMovies = () => {
           title,
           description,
           thumbnail,
-          id: videoId,
+          youtube_id: videoId,
         });
         setIsSharing(false);
-        if (response.success && response.data) {
-          setMovies([response.data, ...movies]);
-        }
       }
     } catch (error) {
       setIsSharing(false);
@@ -143,5 +158,6 @@ export const useMovies = () => {
     getMovies,
     shareMovie,
     isSharing,
+    setMovies,
   };
 };

@@ -32,7 +32,7 @@ const Login = () => {
           placeholder="Email"
           aria-label="email"
           value={email}
-          className="lg:mr-8 h-[40px] px-8 mt-12 lg:mt-0 border rounded-medium border-gray-300"
+          className="lg:mr-8 outline-none h-[40px] px-8 mt-12 lg:mt-0 border rounded-medium border-gray-300"
           onChange={handleSetEmail}
         />
         <input
@@ -41,7 +41,7 @@ const Login = () => {
           placeholder="Password"
           aria-label="password"
           value={password}
-          className="lg:mr-8 h-[40px] px-8 border mt-12 lg:mt-0 rounded-medium border-gray-300"
+          className="lg:mr-8 h-[40px] outline-none px-8 border mt-12 lg:mt-0 rounded-medium border-gray-300"
           onChange={handleSetPassword}
         />
         <Button isLoading={loading} type="submit" isDisable={isDisabled} label="Login / Register" className="px-8 lg:mt-0 h-[40px] mt-12 rounded-medium" />

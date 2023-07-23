@@ -10,7 +10,7 @@ const VideoPlaceholder = ({
   handleClick,
 }: VideoPlaceholderProps) => {
   return (
-    <div className={`video-placeholder flex items-center justify-center overflow-hidden relative w-full lg:w-[350px] min-w-[350px] lg:h-[196px]`} onClick={handleClick}>
+    <div className={`video-placeholder rounded-large flex items-center justify-center overflow-hidden relative w-full lg:w-[350px] min-w-[350px] lg:h-[196px]`} onClick={handleClick}>
       <img
         className="w-full lg:w-[350px] lg:h-[196px] object-cover"
         src={thumbnail || "/video-placeholder.png"}

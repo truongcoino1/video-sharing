@@ -14,8 +14,7 @@ describe("useMovies", () => {
 
   it("getMovies should work when getMovies API success", async () => {
     HomeService.getMovies = jest.fn().mockResolvedValue({
-      success: true,
-      data: [{ id: 1 }],
+      docs: [{ data: () => ({ id: 1 }) }],
     });
     const { result } = renderHook(() => useMovies());
     await act(async () => {
@@ -25,9 +24,7 @@ describe("useMovies", () => {
   });
 
   it("getMovies should work when getMovies API fail", async () => {
-    HomeService.getMovies = jest.fn().mockResolvedValue({
-      success: false,
-    });
+    HomeService.getMovies = jest.fn().mockResolvedValue(null);
     const { result } = renderHook(() => useMovies());
     await act(async () => {
       await result.current.getMovies({ refresh: true});
@@ -52,8 +49,7 @@ describe("useMovies", () => {
       ],
     });
     HomeService.shareMovie = jest.fn().mockResolvedValue({
-      success: true,
-      data: { id: 1 },
+      docs: [{ data: () => ({ id: 1 }) }],
     });
     const { result } = renderHook(() => useMovies());
     await act(async () => {
@@ -61,7 +57,7 @@ describe("useMovies", () => {
         "https://www.youtube.com/watch?v=mnlo3ntJG98"
       );
     });
-    expect(result.current.movies).toEqual([{ id: 1 }]);
+    expect(result.current.movies).toEqual([]);
   });
 
   it("shareMovie should work when getYoutubeVideoInfo api success and shareMovie api fail", async () => {

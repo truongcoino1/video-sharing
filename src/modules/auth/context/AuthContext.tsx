@@ -1,8 +1,13 @@
 "use client";
 
-import { Loading, setToken } from "@/modules/base";
+import { useRouter } from "next/navigation";
+import { Loading } from "@/modules/base";
 import React, { useEffect, useState, useContext } from "react";
-import { User } from "../types/auth";
+// import { User } from "../types/auth";
+import {
+  getAuth,
+  User,
+} from "firebase/auth";
 
 type AuthContextProps = {
   currentUser: User | null;
@@ -24,14 +29,15 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
+  const {push} = useRouter();
 
   useEffect(() => {
-    const authString = localStorage.getItem("auth");
-    if (authString) {
-      const auth = JSON.parse(authString);
-      setCurrentUser(auth);
-      setToken(auth.token);
-    }
+    getAuth().onAuthStateChanged((user) => {     
+      setCurrentUser(user);
+      if(!user){
+        push('/')
+      }
+    });
   }, []);
 
   return (

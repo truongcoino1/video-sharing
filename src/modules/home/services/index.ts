@@ -1,16 +1,24 @@
 import { api, ApiResponse } from "@/modules/base";
 import { Movie, MovieSession } from "../types";
+import { getMoviesFirebase, shareMovieFirebase } from "./firebase";
+import {
+  DocumentData,
+  DocumentReference,
+  QuerySnapshot,
+} from "firebase/firestore";
 
 export const HomeService = {
   getMovies: async (
-    page: number,
-    pageSize: number
-  ): Promise<ApiResponse<Movie[]>> => {
-    return await api.get("/movie", { page, page_size: pageSize });
+    limit: number,
+    lastId?: string,
+  ): Promise<QuerySnapshot<DocumentData, DocumentData>> => {
+    return getMoviesFirebase({ limitParam: limit, lastId });
   },
 
-  shareMovie: async (movie: MovieSession): Promise<ApiResponse<Movie>> => {
-    return await api.post("/movie", movie);
+  shareMovie: async (
+    movie: MovieSession
+  ): Promise<DocumentReference<DocumentData, DocumentData>> => {
+    return shareMovieFirebase(movie);
   },
 
   getYoutubeVideoInfo: async (
