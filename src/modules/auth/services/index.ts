@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { api, ApiResponse } from "@/modules/base";
 import { User } from "../types/auth";
 

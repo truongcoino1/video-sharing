@@ -26,6 +26,27 @@ const setUpLogin = () => {
   );
 };
 
+const setUpLoginLoading = () => {
+  return render(
+    <AuthContext.Provider
+      value={{
+        currentUser: {
+          email: "truongvk",
+          token: "123",
+          id: 1,
+          password: "123",
+          refreshToken: "123",
+        },
+        setLoading: jest.fn(),
+        setCurrentUser: jest.fn(),
+        loading: true,
+      }}
+    >
+      <ShareBox />
+    </AuthContext.Provider>
+  );
+};
+
 const shareMovie = jest.fn();
 jest.mock("../hooks/useMovies", () => {
   const useMovies = () => {
@@ -105,5 +126,11 @@ describe("ShareBox", () => {
   it("should render correct ShareBox", () => {
     const element = setUpLogin();
     expect(element).toMatchSnapshot();
+  });
+
+  it("should render correct ShareBox when loading", () => {
+    const result = setUpLoginLoading();
+    const sharebox = result.container.querySelector(".sharebox-container-skeleton");
+    expect(sharebox).toBeInTheDocument();
   });
 });

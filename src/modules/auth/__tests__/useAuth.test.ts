@@ -2,7 +2,7 @@ import { renderHook, act } from "@testing-library/react";
 import { useAuth } from "../hooks/useAuth";
 import { AuthService } from "../services";
 
-jest.mock("../services", ()=>{
+jest.mock("../services", () => {
   return {
     AuthService: {
       login: jest.fn(),
@@ -10,6 +10,14 @@ jest.mock("../services", ()=>{
     },
   };
 });
+
+const push = jest.fn();
+jest.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: push,
+  }),
+  usePathname: () => "/",
+}));
 
 describe("useAuth", () => {
   it("useAuth should work", () => {
@@ -46,7 +54,7 @@ describe("useAuth", () => {
     });
     expect(result.current.loading).toBeFalsy();
     expect(result.current.error).toBeNull();
-    expect(result.current.user).toBeNull()
+    expect(result.current.user).toBeNull();
   });
 
   it("logout should work", async () => {
@@ -55,5 +63,6 @@ describe("useAuth", () => {
       await result.current.logout();
     });
     expect(result.current.user).toEqual(null);
+    expect(push).toBeCalledWith("/");
   });
 });

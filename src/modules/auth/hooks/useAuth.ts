@@ -6,16 +6,19 @@ import { AuthService } from "../services";
 import { User } from "../types/auth";
 import { useAuthContext } from "../context/AuthContext";
 import { setToken } from "@/modules/base";
+import { useRouter } from "next/navigation";
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const { setCurrentUser } = useAuthContext();
+  const router = useRouter();
   const logout = useCallback(() => {
     setUser(null);
     setCurrentUser(null);
     localStorage.removeItem("user");
     AuthService.logout();
+    router.push("/");
   }, []);
 
   const login = useCallback(async (email: string, password: string) => {

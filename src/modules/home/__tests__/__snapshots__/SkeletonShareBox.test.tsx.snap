@@ -1,19 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MovieList should render correct MovieList 1`] = `
+exports[`SkeletonShareBox should render correct SkeletonMovie 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="movie-list-container pt-[32px]"
-      />
+        class="sharebox-container-skeleton mt-[100px] flex items-center justify-center"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+          class="w-[600px] min-w-[600px] min-h-[178px] rounded-large"
+        >
+          <span
+            class="react-loading-skeleton w-[600px] min-w-[600px] min-h-[178px]"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+      </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="movie-list-container pt-[32px]"
-    />
+      class="sharebox-container-skeleton mt-[100px] flex items-center justify-center"
+    >
+      <span
+        aria-busy="true"
+        aria-live="polite"
+        class="w-[600px] min-w-[600px] min-h-[178px] rounded-large"
+      >
+        <span
+          class="react-loading-skeleton w-[600px] min-w-[600px] min-h-[178px]"
+        >
+          ‌
+        </span>
+        <br />
+      </span>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

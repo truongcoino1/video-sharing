@@ -1,7 +1,7 @@
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import Login from "../components/Login";
 import {flushPromises} from '@/modules/base';
-import "@/modules/base/utils/jest.mock";
+
 
 const login = jest.fn();
 jest.mock("../hooks/useAuth", () => {
@@ -14,6 +14,14 @@ jest.mock("../hooks/useAuth", () => {
     useAuth,
   };
 });
+
+const push = jest.fn();
+jest.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: push,
+  }),
+  usePathname: () => "/",
+}));
 
 describe("Login", () => {
   afterEach(cleanup);

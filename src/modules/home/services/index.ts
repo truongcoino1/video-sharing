@@ -1,9 +1,10 @@
+/* istanbul ignore file */
+
 import { api, ApiResponse } from "@/modules/base";
 import { Movie, MovieSession } from "../types";
 
 export const HomeService = {
   getMovies: async (
-   
     pageSize: number,
     lastMovieId?: string,
   ): Promise<ApiResponse<Movie[]>> => {

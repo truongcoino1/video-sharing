@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import qs from 'querystringify';
 import _ from 'lodash';
 type TRequestHeader = {

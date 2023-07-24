@@ -1,6 +1,14 @@
 import { render, cleanup } from "@testing-library/react";
 import Share from "../pages/SharePage";
 
+const push = jest.fn();
+jest.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: push,
+  }),
+  usePathname: () => "/",
+}));
+
 describe("SharePage", () => {
   afterEach(cleanup);
 

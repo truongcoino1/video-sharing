@@ -1,9 +1,11 @@
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import UserAction from "../components/UserAction";
+import { useRouter } from 'next/navigation'
 
+const push = jest.fn();
 jest.mock("next/navigation", () => ({
   useRouter: () => ({
-    push: jest.fn(),
+    push: push,
   }),
   usePathname: () => "/",
 }));
@@ -53,5 +55,13 @@ describe("UserAction", () => {
   it('should render correct Login', () => {
     const element = render(<UserAction />)
     expect(element).toMatchSnapshot();
+  });
+
+  it('should go to share page when click on share button', () => {
+    const {push} = useRouter()
+    const result = render(<UserAction />);
+    const btn = result.container.querySelector(".btn-share-movie") as Element;
+    fireEvent.click(btn)
+    expect(push).toBeCalledWith("/share")
   });
 });

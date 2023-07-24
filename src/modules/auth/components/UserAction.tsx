@@ -13,7 +13,7 @@ const UserAction = ({ email }: UserActionProps) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const goToSharePage = () => {
+  const goToSharePage = () => {    
     router.push(PATH_SHARE);
   };
 

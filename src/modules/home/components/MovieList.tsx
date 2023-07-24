@@ -20,7 +20,6 @@ const MovieList = () => {
   useEffect(() => {
     if (isConnected) {
       subscribe("share-movie", (data: any) => {
-        console.log('-------', data)
         setMovies((prev) => [data, ...prev]);
       });
     }
@@ -48,9 +47,11 @@ const MovieList = () => {
         <div className="btn-loadmore-wrapper flex items-center justify-center mt-24">
           <Button
             isLoading={period.loadMore}
-            className="w-[150px] h-[40px]"
+            className="w-[150px] h-[40px] btn-loadmore"
             label="Load more"
-            onClick={() => getMovies({ loadMore: true })}
+            onClick={() => {
+              getMovies({ loadMore: true })
+            }}
           />
         </div>
       )}

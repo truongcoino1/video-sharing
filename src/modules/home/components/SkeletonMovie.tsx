@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton";
 
 const SkeletonMovie = (): JSX.Element => {
   return (
-    <div className="movie-item flex justify-between mb-12">
+    <div className="movie-item-skeleton flex justify-between mb-12">
       <Skeleton className="w-[350px] min-w-[350px] h-[196px] flex-shrink-0 overflow-hidden relative" />
       <div className="h-[196px] ml-24 flex-grow">
         <Skeleton

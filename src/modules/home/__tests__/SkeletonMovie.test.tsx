@@ -1,5 +1,5 @@
 import { render, cleanup } from "@testing-library/react";
-import HomePage from "../pages/HomePage";
+import SkeletonMovie from "../components/SkeletonMovie";
 
 const push = jest.fn();
 jest.mock("next/navigation", () => ({
@@ -26,29 +26,18 @@ jest.mock("../hooks/useMovies", () => {
   };
 });
 
-jest.mock("../../../modules/base/hooks/useSocket", () => {
-  const useSocket = ()=>{
-    return {
-      subscribe: jest.fn(), 
-      isConnected: true
-    }
-  }
-  return {
-    useSocket
-  };
-});
 
-describe("HomePage", () => {
+describe("SkeletonMovie", () => {
   afterEach(cleanup);
 
   it("share should render without crash", () => {
-    const result = render(<HomePage />);
-    const elm = result.container.querySelector(".home-container");
+    const result = render(<SkeletonMovie />);
+    const elm = result.container.querySelector(".movie-item-skeleton");
     expect(elm).toBeInTheDocument();
   });
 
-  it("should render correct HomePage", () => {
-    const element = render(<HomePage />);
+  it("should render correct SkeletonMovie", () => {
+    const element = render(<SkeletonMovie />);
     expect(element).toMatchSnapshot();
   });
 });

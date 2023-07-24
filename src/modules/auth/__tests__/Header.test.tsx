@@ -46,6 +46,27 @@ const setUpLogin = () => {
   );
 };
 
+const setUpLoginLoading = () => {
+  return render(
+    <AuthContext.Provider
+      value={{
+        currentUser: {
+          email: "truongvk",
+          token: "123",
+          id: 1,
+          password: "123",
+          refreshToken: "123",
+        },
+        setLoading: jest.fn(),
+        setCurrentUser: jest.fn(),
+        loading: true,
+      }}
+    >
+      <Header />
+    </AuthContext.Provider>
+  );
+};
+
 describe("Header", () => {
   afterEach(cleanup);
  
@@ -107,5 +128,11 @@ describe("Header", () => {
   it("should render correct Header", () => {
     const header = render(<Header />);
     expect(header).toMatchSnapshot();
+  });
+
+  it("should loading placeholder Header when loading", () => {
+    const result = setUpLoginLoading();
+    const elm = result.container.querySelector(".login-placeholder");
+    expect(elm).toBeInTheDocument();
   });
 });

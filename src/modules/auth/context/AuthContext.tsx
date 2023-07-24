@@ -1,7 +1,7 @@
 "use client";
 
-import { Loading, setToken } from "@/modules/base";
-import React, { useEffect, useState, useContext } from "react";
+import { setToken } from "@/modules/base";
+import React, { useEffect, useContext } from "react";
 import { User } from "../types/auth";
 import { useRouter } from "next/navigation";
 
@@ -25,12 +25,12 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = React.useState<User | null>(null);
+  const [loading, setLoading] = React.useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    const authString = localStorage.getItem("user");
+    const authString = localStorage.getItem("user");  
     if (authString) {
       const auth = JSON.parse(authString);
       setCurrentUser(auth);
@@ -40,12 +40,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
     setLoading(false);
   }, []);
-
-  useEffect(() => {
-    if (!currentUser) {
-      router.push("/");
-    }
-  }, [currentUser]);
 
   return (
     <AuthContext.Provider
