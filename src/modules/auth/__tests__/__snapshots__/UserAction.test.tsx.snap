@@ -6,24 +6,23 @@ exports[`UserAction should render correct Login 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="user-action-container"
+        class="user-action-container flex items-center"
       >
         <span
-          class="txt-welcome"
+          class="txt-welcome "
         >
           Welcome 
+          <span
+            class="text-primary-250 font-semibold"
+          />
         </span>
         <button
-          class="btn-share-movie ml-12"
+          class="btn-share-movie ml-12 w-[120px] h-[36px] flex items-center rounded-medium justify-center relative before:z-0  text-dark-high hover:before:bg-light-100/20 bg-dark-200 before:h-full before:w-full before:absolute before:top-0 before:left-0 before:rounded-medium "
         >
-          <a
-            href="/share"
-          >
-            Share a movie
-          </a>
+          Share a movie
         </button>
         <button
-          class="btn-logout ml-12"
+          class="btn-logout ml-12 border border-gray-300 h-[36px] px-[12px] rounded-medium"
         >
           Logout
         </button>
@@ -32,24 +31,23 @@ exports[`UserAction should render correct Login 1`] = `
   </body>,
   "container": <div>
     <div
-      class="user-action-container"
+      class="user-action-container flex items-center"
     >
       <span
-        class="txt-welcome"
+        class="txt-welcome "
       >
         Welcome 
+        <span
+          class="text-primary-250 font-semibold"
+        />
       </span>
       <button
-        class="btn-share-movie ml-12"
+        class="btn-share-movie ml-12 w-[120px] h-[36px] flex items-center rounded-medium justify-center relative before:z-0  text-dark-high hover:before:bg-light-100/20 bg-dark-200 before:h-full before:w-full before:absolute before:top-0 before:left-0 before:rounded-medium "
       >
-        <a
-          href="/share"
-        >
-          Share a movie
-        </a>
+        Share a movie
       </button>
       <button
-        class="btn-logout ml-12"
+        class="btn-logout ml-12 border border-gray-300 h-[36px] px-[12px] rounded-medium"
       >
         Logout
       </button>

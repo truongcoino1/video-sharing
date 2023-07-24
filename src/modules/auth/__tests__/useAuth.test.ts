@@ -2,6 +2,15 @@ import { renderHook, act } from "@testing-library/react";
 import { useAuth } from "../hooks/useAuth";
 import { AuthService } from "../services";
 
+jest.mock("../services", ()=>{
+  return {
+    AuthService: {
+      login: jest.fn(),
+      logout: jest.fn(),
+    },
+  };
+});
+
 describe("useAuth", () => {
   it("useAuth should work", () => {
     const { result } = renderHook(() => useAuth());

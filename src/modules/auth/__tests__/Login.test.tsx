@@ -1,6 +1,7 @@
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import Login from "../components/Login";
 import {flushPromises} from '@/modules/base';
+import "@/modules/base/utils/jest.mock";
 
 const login = jest.fn();
 jest.mock("../hooks/useAuth", () => {

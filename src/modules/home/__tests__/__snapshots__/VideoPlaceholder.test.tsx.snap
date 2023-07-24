@@ -6,11 +6,11 @@ exports[`VideoPlaceholder should render correct VideoPlaceholder 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="video-placeholder flex items-center justify-center overflow-hidden relative w-full lg:w-[350px] min-w-[350px] lg:h-[196px]"
+        class="video-placeholder cursor-pointer rounded-large flex items-center justify-center overflow-hidden relative w-full lg:w-[350px] min-w-[350px] lg:h-[196px]"
       >
         <img
           alt="video placeholder"
-          class="w-full lg:w-[350px] lg:h-[196px] object-cover"
+          class="w-full lg:w-[350px] rounded-large lg:h-[196px] object-cover"
           height="480"
           src="https://i.ytimg.com/vi/r3ARBhMk_g4/sddefault.jpg"
           width="640"
@@ -27,11 +27,11 @@ exports[`VideoPlaceholder should render correct VideoPlaceholder 1`] = `
   </body>,
   "container": <div>
     <div
-      class="video-placeholder flex items-center justify-center overflow-hidden relative w-full lg:w-[350px] min-w-[350px] lg:h-[196px]"
+      class="video-placeholder cursor-pointer rounded-large flex items-center justify-center overflow-hidden relative w-full lg:w-[350px] min-w-[350px] lg:h-[196px]"
     >
       <img
         alt="video placeholder"
-        class="w-full lg:w-[350px] lg:h-[196px] object-cover"
+        class="w-full lg:w-[350px] rounded-large lg:h-[196px] object-cover"
         height="480"
         src="https://i.ytimg.com/vi/r3ARBhMk_g4/sddefault.jpg"
         width="640"

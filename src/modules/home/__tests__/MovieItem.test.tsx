@@ -1,14 +1,20 @@
+/**
+ * @jest-environment jsdom
+ */
 import { render, cleanup } from "@testing-library/react";
 import MovieItem from "../components/MovieItem";
 import { Movie } from "../types";
 import { act } from "react-dom/test-utils";
+
 const movie: Movie = {
   id: "123",
   title: "title",
   description: "description",
   thumbnail: "https://i.ytimg.com/vi/bP9gMpl1gyQ/sddefault.jpg",
   shared_by: "shared_by",
+  youtube_id: 'dsdss'
 };
+
 describe("MovieItem", () => {
   afterEach(cleanup);
 

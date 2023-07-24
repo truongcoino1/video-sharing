@@ -9,10 +9,10 @@ exports[`SharePage should render correct HomePage 1`] = `
         class="home-container w-full"
       >
         <header
-          class="header-container lg:h-[66px] lg:flex lg:justify-between lg:items-center border-b border-gray-300"
+          class="header-container p-[16px] lg:p-0 lg:h-[66px] lg:flex lg:justify-between lg:items-center border-b border-gray-300"
         >
           <h1
-            class="title text-[36px] font-semibold"
+            class="title text-[36px] font-semibold mb-[8px] lg:mb-0"
           >
             <a
               class="no-style hover:text-black text-light-high flex"
@@ -49,7 +49,7 @@ exports[`SharePage should render correct HomePage 1`] = `
                 value=""
               />
               <button
-                class="px-8 lg:mt-0 h-[40px] mt-12 rounded-medium flex items-center justify-center opacity-50 cursor-not-allowed bg-dark-200 text-dark-high "
+                class="px-8 lg:mt-0 h-[40px] mt-12 rounded-medium flex items-center rounded-medium justify-center opacity-50 cursor-not-allowed bg-dark-200 text-dark-high "
                 disabled=""
                 type="submit"
               >
@@ -520,10 +520,10 @@ exports[`SharePage should render correct HomePage 1`] = `
       class="home-container w-full"
     >
       <header
-        class="header-container lg:h-[66px] lg:flex lg:justify-between lg:items-center border-b border-gray-300"
+        class="header-container p-[16px] lg:p-0 lg:h-[66px] lg:flex lg:justify-between lg:items-center border-b border-gray-300"
       >
         <h1
-          class="title text-[36px] font-semibold"
+          class="title text-[36px] font-semibold mb-[8px] lg:mb-0"
         >
           <a
             class="no-style hover:text-black text-light-high flex"
@@ -560,7 +560,7 @@ exports[`SharePage should render correct HomePage 1`] = `
               value=""
             />
             <button
-              class="px-8 lg:mt-0 h-[40px] mt-12 rounded-medium flex items-center justify-center opacity-50 cursor-not-allowed bg-dark-200 text-dark-high "
+              class="px-8 lg:mt-0 h-[40px] mt-12 rounded-medium flex items-center rounded-medium justify-center opacity-50 cursor-not-allowed bg-dark-200 text-dark-high "
               disabled=""
               type="submit"
             >

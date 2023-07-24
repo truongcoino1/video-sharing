@@ -36,6 +36,7 @@
     "@testing-library/react": "^14.0.0",
     "@types/lodash": "^4.14.195",
     "@types/querystringify": "^2.0.0",
+    "core-js": "^3.31.1",
     "jest": "^29.6.1",
     "jest-environment-jsdom": "^29.6.1"
   }

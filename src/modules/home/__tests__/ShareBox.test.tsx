@@ -1,6 +1,30 @@
-import { render, cleanup, renderHook, act } from "@testing-library/react";
+import { render, cleanup } from "@testing-library/react";
 import ShareBox from "../components/ShareBox";
 import {flushPromises} from '@/modules/base';
+import { AuthContext } from "@/modules/auth";
+//@ts-ignore
+global.setImmediate = jest.useRealTimers;
+
+const setUpLogin = () => {
+  return render(
+    <AuthContext.Provider
+      value={{
+        currentUser: {
+          email: "truongvk",
+          token: "123",
+          id: 1,
+          password: "123",
+          refreshToken: "123",
+        },
+        setLoading: jest.fn(),
+        setCurrentUser: jest.fn(),
+        loading: false,
+      }}
+    >
+      <ShareBox />
+    </AuthContext.Provider>
+  );
+};
 
 const shareMovie = jest.fn();
 jest.mock("../hooks/useMovies", () => {
@@ -17,26 +41,26 @@ jest.mock("../hooks/useMovies", () => {
 describe("ShareBox", () => {
   afterEach(cleanup);
   it("ShareBox should render without crash", () => {
-    const result = render(<ShareBox />);
+    const result = setUpLogin();
     const elm = result.container.querySelector(".sharebox-container");
     expect(elm).toBeInTheDocument();
   });
 
   it("ShareBox should render form", () => {
-    const result = render(<ShareBox />);
+    const result = setUpLogin();
     const elm = result.container.querySelector(".sharebox-form");
     expect(elm).toBeInTheDocument();
   });
 
   it("ShareBox should render title", () => {
-    const result = render(<ShareBox />);
+    const result = setUpLogin();
     const elm = result.container.querySelector(".sharebox-title");
     expect(elm).toBeInTheDocument();
     expect(elm?.innerHTML).toBe("Share a Youtube movie");
   });
 
   it("ShareBox should render url input", () => {
-    const result = render(<ShareBox />);
+    const result = setUpLogin();
     const elm = result.container.querySelector(".sharebox-url");
     expect(elm).toBeInTheDocument();
     expect(elm?.querySelector("label")?.innerHTML).toBe("Youtube URL:");
@@ -45,7 +69,7 @@ describe("ShareBox", () => {
   });
 
   it("ShareBox should render submit button", () => {
-    const result = render(<ShareBox />);
+    const result = setUpLogin();
     const elm = result.container.querySelector(".sharebox-submit");
     expect(elm).toBeInTheDocument();
     expect(elm?.querySelector("button")?.getAttribute("name")).toBe("submit");
@@ -54,13 +78,13 @@ describe("ShareBox", () => {
   });
 
   it("ShareBox should disable submit button when url is empty", () => {
-    const result = render(<ShareBox />);
+    const result = setUpLogin();
     const elm = result.container.querySelector(".sharebox-submit");
     expect(elm?.querySelector("button")?.getAttribute("disabled")).toBe("");
   });
 
   it("ShareBox should enable submit button when url is not empty", () => {
-    const result = render(<ShareBox />);
+    const result = setUpLogin();
     const elm = result.container.querySelector(".sharebox-submit");
     const input = result.container.querySelector(".sharebox-url input");
     input?.setAttribute("value", "https://www.youtube.com/watch?v=123");
@@ -68,7 +92,7 @@ describe("ShareBox", () => {
   });
 
   it("ShareBox should call shareMovie when submit form", async () => {
-    const result = render(<ShareBox />);
+    const result = setUpLogin();
     const form = result.container.querySelector(".sharebox-form");
     const input = result.container.querySelector(".sharebox-url input");
     input?.setAttribute("value", "https://www.youtube.com/watch?v=123");
@@ -79,7 +103,7 @@ describe("ShareBox", () => {
   });
 
   it("should render correct ShareBox", () => {
-    const element = render(<ShareBox />);
+    const element = setUpLogin();
     expect(element).toMatchSnapshot();
   });
 });

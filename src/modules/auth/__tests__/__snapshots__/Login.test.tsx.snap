@@ -28,7 +28,7 @@ exports[`Login should render correct Login 1`] = `
             value=""
           />
           <button
-            class="px-8 lg:mt-0 h-[40px] mt-12 rounded-medium flex items-center justify-center opacity-50 cursor-not-allowed bg-dark-200 text-dark-high "
+            class="px-8 lg:mt-0 h-[40px] mt-12 rounded-medium flex items-center rounded-medium justify-center opacity-50 cursor-not-allowed bg-dark-200 text-dark-high "
             disabled=""
             type="submit"
           >
@@ -62,7 +62,7 @@ exports[`Login should render correct Login 1`] = `
           value=""
         />
         <button
-          class="px-8 lg:mt-0 h-[40px] mt-12 rounded-medium flex items-center justify-center opacity-50 cursor-not-allowed bg-dark-200 text-dark-high "
+          class="px-8 lg:mt-0 h-[40px] mt-12 rounded-medium flex items-center rounded-medium justify-center opacity-50 cursor-not-allowed bg-dark-200 text-dark-high "
           disabled=""
           type="submit"
         >

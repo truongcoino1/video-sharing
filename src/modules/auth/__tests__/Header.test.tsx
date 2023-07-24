@@ -2,6 +2,14 @@ import { render, cleanup, fireEvent, waitFor } from "@testing-library/react";
 import { AuthContext } from "../context/AuthContext";
 import Header from "../components/Header";
 
+jest.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+  }),
+  usePathname: () => "/",
+}));
+ //@ts-ignore
+ global.setImmediate = jest.useRealTimers;
 const setUpNotLogin = () => {
   return render(
     <AuthContext.Provider
@@ -40,7 +48,7 @@ const setUpLogin = () => {
 
 describe("Header", () => {
   afterEach(cleanup);
-
+ 
   it("Header render without crash", async () => {
     const result = setUpNotLogin();
     const elm = result.container.querySelector(".header-container");
@@ -96,8 +104,8 @@ describe("Header", () => {
     waitFor(() => expect(actionElm).toBeInTheDocument());
   });
 
-  it('should render correct Header', () => {
-    const header = render(<Header />)
+  it("should render correct Header", () => {
+    const header = render(<Header />);
     expect(header).toMatchSnapshot();
   });
 });

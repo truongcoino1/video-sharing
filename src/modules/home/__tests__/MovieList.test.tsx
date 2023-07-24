@@ -2,6 +2,18 @@ import { render, cleanup } from "@testing-library/react";
 import MovieList from "../components/MovieList";
 import { act } from "react-dom/test-utils";
 
+jest.mock("../../../modules/base/services/websocket", () => {
+  return {
+    socket: {
+      on: jest.fn(),
+      emit: jest.fn(),
+      connect: jest.fn(),
+      disconnect: jest.fn(),
+      off: jest.fn()
+    }
+  }
+});
+
 describe("MovieList", () => {
   afterEach(cleanup);
 

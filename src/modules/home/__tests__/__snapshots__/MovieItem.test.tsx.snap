@@ -9,11 +9,11 @@ exports[`MovieItem should render correct MovieItem 1`] = `
         class="movie-item lg:flex justify-between mb-12"
       >
         <div
-          class="video-placeholder flex items-center justify-center overflow-hidden relative w-full lg:w-[350px] min-w-[350px] lg:h-[196px]"
+          class="video-placeholder cursor-pointer rounded-large flex items-center justify-center overflow-hidden relative w-full lg:w-[350px] min-w-[350px] lg:h-[196px]"
         >
           <img
             alt="video placeholder"
-            class="w-full lg:w-[350px] lg:h-[196px] object-cover"
+            class="w-full lg:w-[350px] rounded-large lg:h-[196px] object-cover"
             height="480"
             src="https://i.ytimg.com/vi/bP9gMpl1gyQ/sddefault.jpg"
             width="640"
@@ -76,11 +76,11 @@ exports[`MovieItem should render correct MovieItem 1`] = `
       class="movie-item lg:flex justify-between mb-12"
     >
       <div
-        class="video-placeholder flex items-center justify-center overflow-hidden relative w-full lg:w-[350px] min-w-[350px] lg:h-[196px]"
+        class="video-placeholder cursor-pointer rounded-large flex items-center justify-center overflow-hidden relative w-full lg:w-[350px] min-w-[350px] lg:h-[196px]"
       >
         <img
           alt="video placeholder"
-          class="w-full lg:w-[350px] lg:h-[196px] object-cover"
+          class="w-full lg:w-[350px] rounded-large lg:h-[196px] object-cover"
           height="480"
           src="https://i.ytimg.com/vi/bP9gMpl1gyQ/sddefault.jpg"
           width="640"

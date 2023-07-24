@@ -1,6 +1,12 @@
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import UserAction from "../components/UserAction";
-import { useAuth } from "../hooks/useAuth";
+
+jest.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+  }),
+  usePathname: () => "/",
+}));
 
 const logout = jest.fn();
 jest.mock("../hooks/useAuth", () => {
