@@ -14,10 +14,10 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={`${className} flex items-center justify-center ${
+      className={`${className} flex items-center rounded-medium justify-center ${
         isDisable
           ? "opacity-50 cursor-not-allowed bg-dark-200 text-dark-high"
-          : `relative before:z-0 rounded-medium text-dark-high hover:before:bg-light-100/20 bg-dark-200 before:h-full before:w-full before:absolute before:top-0 before:left-0 before:rounded-medium`
+          : `relative before:z-0  text-dark-high hover:before:bg-light-100/20 bg-dark-200 before:h-full before:w-full before:absolute before:top-0 before:left-0 before:rounded-medium`
       } ${isLoading ? '!text-dark-200' : ''}`}
       disabled={isDisable}
       {...props}

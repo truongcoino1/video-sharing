@@ -22,7 +22,7 @@ const STATUS_CODE = {
 export const setToken = (token: string) => {
   DEFAULT_HEADERS = {
     ...DEFAULT_HEADERS,
-    Authorization: `${token}`,
+    Authorization: `Bearer ${token}`,
   };
 };
 

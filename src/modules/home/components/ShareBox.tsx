@@ -1,15 +1,22 @@
 import React from "react";
 import { useInput, Button } from "@/modules/base";
 import { useMovies } from "../hooks/useMovies";
+import { useAuthContext } from "@/modules/auth";
+import SkeletonShareBox from "./SkeletonShareBox";
 
 const ShareBox = () => {
   const { value: url, handleOnChange: handleSetUrl } = useInput("");
   const { shareMovie, isSharing } = useMovies();
+  const { loading } = useAuthContext();
+
+  if (loading) {
+    return <SkeletonShareBox/>
+  }
 
   return (
     <div className="sharebox-container mt-[100px] flex items-center justify-center">
       <form
-        className="sharebox-form border relative border-gray-300 rounded-large w-[600px] p-24"
+        className="sharebox-form border relative border-gray-300 max-w-[calc(100vw_-_32px)] rounded-large w-[600px] p-24"
         onSubmit={(e) => {
           e.preventDefault();          
           shareMovie(url || "");

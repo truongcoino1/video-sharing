@@ -15,7 +15,7 @@ export const AuthContext = React.createContext<AuthContextProps>({
   currentUser: null,
   setCurrentUser: (_: User | null) => {},
   setLoading: (_: boolean) => {},
-  loading: false
+  loading: false,
 });
 
 export const useAuthContext = () => useContext<AuthContextProps>(AuthContext);
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    const authString = localStorage.getItem("auth");
+    const authString = localStorage.getItem("user");
     if (authString) {
       const auth = JSON.parse(authString);
       setCurrentUser(auth);
@@ -39,11 +39,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       router.push("/");
     }
     setLoading(false);
-    console.log('vao day roi ne')
   }, []);
 
+  useEffect(() => {
+    if (!currentUser) {
+      router.push("/");
+    }
+  }, [currentUser]);
+
   return (
-    <AuthContext.Provider value={{ loading, currentUser, setLoading, setCurrentUser }}>
+    <AuthContext.Provider
+      value={{ loading, currentUser, setLoading, setCurrentUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

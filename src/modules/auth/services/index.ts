@@ -8,4 +8,8 @@ export const AuthService = {
   ): Promise<ApiResponse<User>> => {
     return await api.post("/api/auth/login", { email, password });
   },
+
+  logout: async (): Promise<ApiResponse<string>> => {
+    return await api.post("/api/auth/logout", {});
+  },
 };

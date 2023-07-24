@@ -3,14 +3,15 @@ import { Movie, MovieSession } from "../types";
 
 export const HomeService = {
   getMovies: async (
-    page: number,
-    pageSize: number
+   
+    pageSize: number,
+    lastMovieId?: string,
   ): Promise<ApiResponse<Movie[]>> => {
-    return await api.get("/movie", { page, page_size: pageSize });
+    return await api.get("/api/public/movie", { lastMovieId, pageSize: pageSize, orderBy: "DESC" });
   },
 
   shareMovie: async (movie: MovieSession): Promise<ApiResponse<Movie>> => {
-    return await api.post("/movie", movie);
+    return await api.post("/api/movie", movie);
   },
 
   getYoutubeVideoInfo: async (

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { HomeService } from "../services";
 import { getYoutubeVideoId } from "../utils";
 import { Movie } from "../types";
+import { useAuthContext } from "@/modules/auth";
 
 const data = [
   {
@@ -71,6 +72,8 @@ export const useMovies = () => {
     loadMore: false,
   });
 
+  const {currentUser} = useAuthContext();
+
   const [isSharing, setIsSharing] = useState(false);
 
   const getMovies = useCallback(async (param: Period) => {
@@ -79,22 +82,22 @@ export const useMovies = () => {
         ...preState,
         ...param
       }));
-      const page = param.refresh ? 0 : period.page;
-      const response = await HomeService.getMovies(page, period.pageSize);
+      const lastMovieId = movies[movies.length - 1]?.id;
+      const lastMovieIdParam = param.refresh ? undefined : lastMovieId;
+      const response = await HomeService.getMovies(period.pageSize, lastMovieIdParam);
       if (response.status ==="success" && response.result) {
         setMovies(response.result || []);
         setPeriod((preState) => ({
           ...preState,
           loadMore: false,
           refresh: false,
-          page: page + 1,
+          limited: (response.result?.length || 0) < period.pageSize,
         }));
       } else {
         setPeriod((preState) => ({
           ...preState,
           loadMore: false,
           refresh: false,
-          page: preState.page,
         }));
       }
     } catch (error) {
@@ -105,7 +108,7 @@ export const useMovies = () => {
         limited: true,
       }));
     }
-  }, [period.page]);
+  }, [movies, period.pageSize]);
 
   const shareMovie = useCallback(async (youtubeLink: string) => {
     try {
@@ -127,7 +130,8 @@ export const useMovies = () => {
           title,
           description,
           thumbnail,
-          id: videoId,
+          youtube_id: videoId,
+          shared_by: currentUser?.email ?? "",
         });
         setIsSharing(false);
         if (response.status === "success" && response.result) {
@@ -143,7 +147,7 @@ export const useMovies = () => {
       });
       setIsSharing(false);
     }
-  }, []);
+  }, [currentUser?.email, movies]);
 
   return {
     movies,

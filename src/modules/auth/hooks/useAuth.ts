@@ -14,6 +14,8 @@ export const useAuth = () => {
   const logout = useCallback(() => {
     setUser(null);
     setCurrentUser(null);
+    localStorage.removeItem("user");
+    AuthService.logout();
   }, []);
 
   const login = useCallback(async (email: string, password: string) => {

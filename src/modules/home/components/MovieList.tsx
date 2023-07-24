@@ -15,11 +15,12 @@ const MovieList = () => {
 
   useEffect(() => {
     getMovies({ refresh: true });
-  }, [getMovies]);
+  }, []);
 
   useEffect(() => {
     if (isConnected) {
-      subscribe("new-movie", (data: any) => {
+      subscribe("share-movie", (data: any) => {
+        console.log('-------', data)
         setMovies((prev) => [data, ...prev]);
       });
     }

@@ -1,29 +1,32 @@
-import React, { memo } from 'react';
-import Link from 'next/link';
-import {useAuth} from "../hooks/useAuth"
+import React, { memo } from "react";
+import { useAuth } from "../hooks/useAuth";
+import { useRouter, usePathname } from "next/navigation";
+import { Button } from "@/modules/base";
 
-const PATH_SHARE = '/share';
+const PATH_SHARE = "/share";
 
 type UserActionProps = {
   email?: string;
 };
-const UserAction = ({email}: UserActionProps) => {
-  const {logout} = useAuth();
+const UserAction = ({ email }: UserActionProps) => {
+  const { logout } = useAuth();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const goToSharePage = () => {
+    router.push(PATH_SHARE);
+  };
 
   return (
-    <div className="user-action-container">
-      <span className="txt-welcome">Welcome {email}</span>
-      <button
-        className="btn-share-movie ml-12"
-        disabled={window.location.pathname === PATH_SHARE}
-      >
-        {window.location.pathname === PATH_SHARE ? (
-          'Share a movie'
-        ) : (
-          <Link href={PATH_SHARE}>Share a movie</Link>
-        )}
-      </button>
-      <button className="btn-logout ml-12" onClick={logout}>
+    <div className="user-action-container flex items-center">
+      <span className="txt-welcome ">Welcome <span className="text-primary-250 font-semibold">{email}</span></span>
+      <Button
+        label="Share a movie"
+        onClick={goToSharePage}
+        className="btn-share-movie ml-12 w-[120px] h-[36px]"
+        isDisable={pathname === PATH_SHARE}
+      ></Button>
+      <button className="btn-logout ml-12 border border-gray-300 h-[36px] px-[12px] rounded-medium" onClick={logout}>
         Logout
       </button>
     </div>

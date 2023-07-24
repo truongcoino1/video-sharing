@@ -15,9 +15,9 @@ const MovieItem = ({ movie }: MovieItemProps): JSX.Element => {
   return (
     <div className="movie-item lg:flex justify-between mb-12">
       {hasLoadIframe ? (
-        <div className="lg:w-[350px] lg:h-[196px] w-full flex-shrink-0 overflow-hidden relative">
+        <div className="lg:w-[350px] lg:h-[196px] rounded-large w-full flex-shrink-0 overflow-hidden relative">
           <iframe 
-            className="w-full h-full object-cover"
+            className="w-full h-full rounded-large object-cover"
             title={movie.title}
             loading="lazy"
             allow="autoplay; fullscreen; accelerometer; encrypted-media; gyroscope; picture-in-picture"
