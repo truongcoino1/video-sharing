@@ -86,7 +86,7 @@ export const useMovies = () => {
       const lastMovieIdParam = param.refresh ? undefined : lastMovieId;
       const response = await HomeService.getMovies(period.pageSize, lastMovieIdParam);
       if (response.status ==="success" && response.result) {
-        setMovies(response.result || []);
+        setMovies(preState => preState.concat(response.result || []));
         setPeriod((preState) => ({
           ...preState,
           loadMore: false,
