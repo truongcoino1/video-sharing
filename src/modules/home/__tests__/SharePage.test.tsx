@@ -12,7 +12,7 @@ jest.mock("next/navigation", () => ({
 describe("SharePage", () => {
   afterEach(cleanup);
 
-  it("share should render without crash", () => {
+  it("SharePage should render without crash", () => {
     const result = render(<Share />);
     const elm = result.container.querySelector(".share-container");
     expect(elm).toBeInTheDocument();

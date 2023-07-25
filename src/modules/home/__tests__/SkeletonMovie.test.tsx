@@ -30,7 +30,7 @@ jest.mock("../hooks/useMovies", () => {
 describe("SkeletonMovie", () => {
   afterEach(cleanup);
 
-  it("share should render without crash", () => {
+  it("SkeletonMovie should render without crash", () => {
     const result = render(<SkeletonMovie />);
     const elm = result.container.querySelector(".movie-item-skeleton");
     expect(elm).toBeInTheDocument();

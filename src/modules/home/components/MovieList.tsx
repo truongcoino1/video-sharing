@@ -5,13 +5,34 @@ import { useMovies } from "../hooks/useMovies";
 import { Button } from "@/modules/base";
 import { useAuthContext } from "@/modules/auth";
 import { useSocket } from "@/modules/base/hooks/useSocket";
+import { toast } from "react-toastify";
+import { Movie } from "../types";
 
 const fakeMovies = [1, 2, 3, 4, 5];
 
+const VideoNotification = ({ movie }: { movie: Movie }) => {
+  return (
+    <div className="flex">
+      <img
+        src={movie?.thumbnail}
+        className="w-[80px] h-[80px] mr-12 rounded-medium"
+        alt=""
+      />
+      <div className="flex flex-col">
+        <span className="font-medium text-12">{movie?.title}</span>
+        <span className="font-regular text-12">
+          Shared by: <span className="font-medium">{movie?.shared_by}</span>
+        </span>
+      </div>
+    </div>
+  );
+};
+
+let isSubscribed = false;
 const MovieList = () => {
   const { movies, getMovies, period, setMovies } = useMovies();
   const { loading } = useAuthContext();
-  const { isConnected, subscribe } = useSocket();
+  const { isConnected, subscribe, unsubscribe } = useSocket();
 
   useEffect(() => {
     getMovies({ refresh: true });
@@ -19,10 +40,21 @@ const MovieList = () => {
 
   useEffect(() => {
     if (isConnected) {
+      if (isSubscribed) {
+        return;
+      }
+      isSubscribed = true;
       subscribe("share-movie", (data: any) => {
         setMovies((prev) => [data, ...prev]);
+        toast(<VideoNotification movie={data} />, {
+          type: "info",
+          icon: false,
+        });
       });
     }
+    return () => {
+      unsubscribe("share-movie", () => {});
+    };
   }, [isConnected]);
 
   const isShowLoadMore = useMemo(() => {
@@ -50,7 +82,7 @@ const MovieList = () => {
             className="w-[150px] h-[40px] btn-loadmore"
             label="Load more"
             onClick={() => {
-              getMovies({ loadMore: true })
+              getMovies({ loadMore: true });
             }}
           />
         </div>

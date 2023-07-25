@@ -30,7 +30,8 @@ jest.mock("../../../modules/base/hooks/useSocket", () => {
   const useSocket = ()=>{
     return {
       subscribe: jest.fn(), 
-      isConnected: true
+      isConnected: true,
+      unsubscribe: jest.fn()
     }
   }
   return {
@@ -41,7 +42,7 @@ jest.mock("../../../modules/base/hooks/useSocket", () => {
 describe("HomePage", () => {
   afterEach(cleanup);
 
-  it("share should render without crash", () => {
+  it("HomePage should render without crash", () => {
     const result = render(<HomePage />);
     const elm = result.container.querySelector(".home-container");
     expect(elm).toBeInTheDocument();

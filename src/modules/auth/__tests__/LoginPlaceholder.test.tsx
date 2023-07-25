@@ -4,7 +4,7 @@ import LoginPlaceholder from "../components/LoginPlaceholder";
 describe("LoginPlaceholder", () => {
   afterEach(cleanup);
 
-  it("share should render without crash", () => {
+  it("LoginPlaceholder should render without crash", () => {
     const result = render(<LoginPlaceholder />);
     const elm = result.container.querySelector(".login-placeholder");
     expect(elm).toBeInTheDocument();

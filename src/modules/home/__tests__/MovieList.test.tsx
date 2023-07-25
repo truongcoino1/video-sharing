@@ -20,6 +20,7 @@ jest.mock("../../../modules/base/hooks/useSocket", () => {
     return {
       subscribe: subscribe,
       isConnected: true,
+      unsubscribe: jest.fn(),
     };
   };
   return {

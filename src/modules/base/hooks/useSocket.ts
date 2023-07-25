@@ -27,5 +27,9 @@ export const useSocket = () => {
     socket.on(event, callback);
   };
 
-  return { subscribe, isConnected };
+  const unsubscribe = (event: string, callback: (data: any) => void) => {
+    socket.off(event, callback);
+  }
+
+  return { subscribe, isConnected, unsubscribe };
 };
