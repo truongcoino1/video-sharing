@@ -92,9 +92,18 @@ docker-compose up
 
 Server is running at http://localhost:5001
 #### 4. Start test
-```bash
-yarn test
-```
+- Install dependencies
+    ```bash
+    npm run install
+    ```
+    or 
+    ```bash
+    yarn install
+    ```
+- Run tests
+    ```bash
+    yarn test
+    ```
 ### Frontend Setup
 #### 1. Clone repository and install dependencies
 ```bash
@@ -166,4 +175,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 MYSQL_PASSWORD
 MYSQL_DATABASE,
 DOMAIN_ORIGIN,
+3. When port is already in use, you need to kill this port and restart app.
+- Frontend: port 3000
+- Backend: port 5001
+- Database: port 5432 
 
