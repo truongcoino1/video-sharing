@@ -21,7 +21,7 @@ const MovieItem = ({ movie }: MovieItemProps): JSX.Element => {
             title={movie.title}
             loading="lazy"
             allow="autoplay; fullscreen; accelerometer; encrypted-media; gyroscope; picture-in-picture"
-            src={`https://www.youtube.com/embed/${movie.id}?autoplay=1`}
+            src={`https://www.youtube.com/embed/${movie.youtube_id}?autoplay=1`}
           />
         </div>
       ) : (
@@ -34,7 +34,7 @@ const MovieItem = ({ movie }: MovieItemProps): JSX.Element => {
         <div className="font-bold text-[28px] overflow-hidden line-clamp-2 text-cyan-400">
           <a
             className="title-link"
-            href={`https://www.youtube.com/watch?v=${movie.id}`}
+            href={`https://www.youtube.com/watch?v=${movie.youtube_id}`}
             target="_blank"
             rel="noopener noreferrer"
           >
